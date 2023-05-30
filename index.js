@@ -3,13 +3,13 @@
 const yargs = require('yargs');
 const package = require('./package.json');
 const ethereum = require("./lib/ethereum.js");
+const tron = require('./lib/tron.js');
 const fs = require('fs');
-const path = require('path');
 
 yargs.version(package.version);
 yargs.command({
   command: 'create',
-  describe: 'add new note',
+  describe: 'main command for wallet creation',
   builder: {
     network: {
       type: 'string',
@@ -21,20 +21,26 @@ yargs.command({
       demandOption: true,
       describe: 'Amount of wallets, 1 for example'
     },
-
     path: {
       type: 'string',
       demandOption: true,
-      describe: 'D:/'
+      describe: 'D:/file.txt'
     }
   },
   handler({network, amount, path}) {
     if(network === 'eth') {
       const wallets = ethereum.createEthWallet(amount);
-      fs.writeFile(path + "eth_" + new Date().toDateString() + ".txt", wallets, (error) => {
+      fs.writeFile(path, wallets, (error) => {
         if (error) throw error;
       });
-    }  
+    }
+    if(network === 'tron') {
+      tron.createTronWallet(amount).then((wallets) => {
+        fs.writeFile(path, wallets, (error) => {
+          if (error) throw error;
+        });
+      });
+    }
   }
 });
 
