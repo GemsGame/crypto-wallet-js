@@ -22,13 +22,18 @@ yargs.command({
       demandOption: true,
       describe: 'Amount of wallets, 1 for example'
     },
+    xpub:{
+      type: 'string',
+      demandOption: false,
+      describe: 'Your xpub address'
+    },
     path: {
       type: 'string',
       demandOption: true,
       describe: 'D:/file.txt'
     }
   },
-  handler({network, amount, path}) {
+  handler({network, amount, path, xpub}) {
     if(network === 'eth') {
       const wallets = ethereum.createEthWallet(amount);
       fs.writeFile(path, wallets, (error) => {
@@ -43,7 +48,7 @@ yargs.command({
       });
     }
     if(network === 'bitcoin') {
-      const wallets = bitcoin.generateWallets(amount);
+      const wallets = bitcoin.generateWallets(amount, xpub);
       fs.writeFile(path, wallets, (error) => {
         if (error) throw error;
       });
