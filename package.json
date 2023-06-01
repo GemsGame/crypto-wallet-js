@@ -11,6 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bip32": "^4.0.0",
+    "bitcoinjs-lib": "^6.1.1",
+    "ecpair": "^2.1.0",
+    "tiny-secp256k1": "^2.2.1",
     "tronweb": "^5.2.0",
     "web3-eth-accounts": "^1.10.0",
     "yargs": "^17.7.2"

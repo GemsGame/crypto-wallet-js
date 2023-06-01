@@ -4,6 +4,7 @@ const yargs = require('yargs');
 const package = require('./package.json');
 const ethereum = require("./lib/ethereum.js");
 const tron = require('./lib/tron.js');
+const bitcoin = require('./lib/bitcoin.js');
 const fs = require('fs');
 
 yargs.version(package.version);
@@ -39,6 +40,12 @@ yargs.command({
         fs.writeFile(path, wallets, (error) => {
           if (error) throw error;
         });
+      });
+    }
+    if(network === 'bitcoin') {
+      const wallets = bitcoin.generateWallets(amount);
+      fs.writeFile(path, wallets, (error) => {
+        if (error) throw error;
       });
     }
   }
