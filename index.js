@@ -52,7 +52,7 @@ yargs.command({
 });
 
 yargs.command({
-  command: 'create-by-seed-auto',
+  command: 'create-by-seed',
   describe: '',
   builder: {
     network: {
@@ -70,21 +70,27 @@ yargs.command({
       demandOption: true,
       describe: 'D:/file.txt'
     },
+    seed: {
+      type: 'string',
+      demandOption: false,
+      describe: ''
+    }
   },
 
-  async handler({ network, amount, path }) {
+  async handler({ network, amount, path, seed }) {
 
     if (network === 'eth' || network === 'ethereum') {
 
-      const _seed = ethereum.createSeed();
-      const wallets = await ethereum.createWalletBySeed(_seed, amount);
+      if (!seed) seed = ethereum.createSeed();
 
-      fs.writeFile(path, 'seed phrase:' + _seed + '\n' + wallets, (error) => {
+      const wallets = await ethereum.createWalletBySeed(seed, amount);
+
+      fs.writeFile(path, 'seed phrase:' + seed + '\n' + wallets, (error) => {
         if (error) throw error;
       });
     }
   }
-  
+
 });
 
 
@@ -92,7 +98,8 @@ yargs.command({
   command: 'create-seed',
   describe: '',
   handler() {
-    ethereum.createSeed().then(seed => console.log(seed))
+    const seed = ethereum.createSeed();
+    console.log(seed)
   }
 });
 

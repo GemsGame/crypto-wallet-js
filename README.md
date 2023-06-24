@@ -11,8 +11,13 @@ cwj create --network=bitcoin --xpub=xpub6CmcGnJZLYY3GFFiDKr7fJXn84Zhia3TYJhEU9wt
 ```
 
 #### Ethereum
+
 ```
 cwj create --network=eth --amount=1 --path=D:/ethereum.txt
+cwj create-seed
+cwj create-by-seed --amount=5 --network=eth --path=D:/seed.txt --seed="topple uniform buyer renew brother aisle bubble ten ankle rebuild usage firm"
+cwj create-by-seed --amount=5 --network=eth --path=D:/seed.txt
+
 ```
 
 #### Tron
