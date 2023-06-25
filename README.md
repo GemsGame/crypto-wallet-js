@@ -35,3 +35,31 @@ cwj create-by-seed --amount=5 --network=eth --path=D:/seed.json
 ```
 cwj create --network=tron --amount=1 --path=D:/tron.json
 ```
+
+
+##### Alternative use
+You may to use the cwj library in the your project.
+Look at the sample below 
+
+```
+const cwj = require('cwj');
+
+const seed = cwj.ethereum.createSeed();
+const result = cwj.ethereum.createWalletBySeed(seed, 1);
+
+```
+
+The result is object
+
+```
+{
+  "seed": "random chat wasp patrol stereo invite lounge match viable ordinary erode frown",
+  "wallets": [
+    {
+      "address": "0xAB0384e4304F02cB4B317E48E612319aFd3B0E18",
+      "private": "0x4f0d24e36facfaa3ce61b61f01c6546bee4b0c6d0ce46c48f3e1e9a6e96eb253"
+    }
+  ]
+}
+
+```

@@ -28,7 +28,7 @@ yargs.command({
       describe: "D:/file.txt",
     },
   },
-  handler({ network, amount, path, xpub }) {
+  handler({ network, amount, path }) {
     if (network === "eth") {
       const result = ethereum.createEthWallet(amount);
       fs.writeFile(path, JSON.stringify(result), (error) => {
@@ -75,7 +75,7 @@ yargs.command({
     if (network === "eth" || network === "ethereum") {
       if (!seed) seed = ethereum.createSeed();
       const result = await ethereum.createWalletBySeed(seed, amount);
-      
+
       fs.writeFile(path, JSON.stringify(result), (error) => {
         if (error) throw error;
       });
