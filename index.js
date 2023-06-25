@@ -1,163 +1,164 @@
 #!/usr/bin/env node
 
-const yargs = require('yargs');
-const package = require('./package.json');
+const yargs = require("yargs");
+const package = require("./package.json");
 const ethereum = require("./lib/ethereum.js");
-const tron = require('./lib/tron.js');
-const bitcoin = require('./lib/bitcoin.js');
-const fs = require('fs');
+const tron = require("./lib/tron.js");
+const bitcoin = require("./lib/bitcoin.js");
+const fs = require("fs");
 
 yargs.version(package.version);
 yargs.command({
-  command: 'create',
-  describe: 'main command for wallet creation',
+  command: "create",
+  describe: "main command for wallet creation",
   builder: {
     network: {
-      type: 'string',
+      type: "string",
       demandOption: true,
-      describe: 'Networks: eth, bitcoin, tron'
+      describe: "Networks: eth, bitcoin, tron",
     },
     amount: {
-      type: 'number',
+      type: "number",
       demandOption: true,
-      describe: 'Amount of wallets, 1 for example'
+      describe: "Amount of wallets, 1 for example",
     },
     path: {
-      type: 'string',
+      type: "string",
       demandOption: true,
-      describe: 'D:/file.txt'
-    }
+      describe: "D:/file.txt",
+    },
   },
   handler({ network, amount, path, xpub }) {
-    if (network === 'eth') {
+    if (network === "eth") {
       const wallets = ethereum.createEthWallet(amount);
       fs.writeFile(path, wallets, (error) => {
         if (error) throw error;
       });
     }
-    if (network === 'tron') {
+    if (network === "tron") {
       tron.createTronWallet(amount).then((wallets) => {
         fs.writeFile(path, wallets, (error) => {
           if (error) throw error;
         });
       });
     }
-  }
+  },
 });
 
 yargs.command({
-  command: 'create-by-seed',
-  describe: '',
+  command: "create-by-seed",
+  describe: "",
   builder: {
     network: {
-      type: 'string',
+      type: "string",
       demandOption: false,
-      describe: 'Networks: eth, bitcoin, tron'
+      describe: "Networks: eth, bitcoin, tron",
     },
     amount: {
-      type: 'number',
+      type: "number",
       demandOption: false,
-      describe: 'Amount of wallets, 1 for example'
+      describe: "Amount of wallets, 1 for example",
     },
     path: {
-      type: 'string',
+      type: "string",
       demandOption: true,
-      describe: 'D:/file.txt'
+      describe: "D:/file.txt",
     },
     seed: {
-      type: 'string',
+      type: "string",
       demandOption: false,
-      describe: ''
-    }
+      describe: "",
+    },
   },
 
   async handler({ network, amount, path, seed }) {
-
-    if (network === 'eth' || network === 'ethereum') {
-
+    if (network === "eth" || network === "ethereum") {
       if (!seed) seed = ethereum.createSeed();
 
       const wallets = await ethereum.createWalletBySeed(seed, amount);
 
-      fs.writeFile(path, 'seed phrase:' + seed + '\n' + wallets, (error) => {
+      fs.writeFile(path, "seed phrase:" + seed + "\n" + wallets, (error) => {
         if (error) throw error;
       });
     }
 
-    if (network === 'bitcoin' || network === 'btc') {
+    if (network === "bitcoin" || network === "btc") {
+      if (!seed) seed = bitcoin.createSeed();
+      if (seed.length) seed = bitcoin.generateSeed(seed);
 
-      //if (!seed) seed = ethereum.createSeed();
+      const result = bitcoin.generateWalletBySeed(seed, amount);
 
-      //const wallets = await ethereum.createWalletBySeed(seed, amount);
-
-      //fs.writeFile(path, 'seed phrase:' + seed + '\n' + wallets, (error) => {
-        //if (error) throw error;
-      //});
+      fs.writeFile(path, result, (error) => {
+        if (error) throw error;
+      });
     }
-  }
-
+  },
 });
 
-
 yargs.command({
-  command: 'create-seed',
-  describe: 'The command create a new 12 words phrase',
+  command: "create-seed",
+  describe: "The command create a new 12 words phrase",
   handler() {
-    const seed = ethereum.createSeed();
-    console.log(seed)
-  }
+    if (network === "btc" || network === "bitcoin") {
+      const seed = ethereum.createSeed();
+      console.log(seed);
+    }
+
+    if (network === "eth" || network === "ethereum") {
+      const seed = ethereum.createSeed();
+      console.log(seed);
+    }
+  },
 });
 
 yargs.command({
-  command: 'create-by-xpub',
-  describe: '',
+  command: "create-by-xpub",
+  describe: "",
   builder: {
     amount: {
-      type: 'number',
+      type: "number",
       demandOption: false,
-      describe: 'Amount of wallets, 1 for example'
+      describe: "Amount of wallets, 1 for example",
     },
     path: {
-      type: 'string',
+      type: "string",
       demandOption: true,
-      describe: 'D:/file.txt'
+      describe: "D:/file.txt",
     },
     xpub: {
-      type: 'string',
+      type: "string",
       demandOption: true,
-      describe: 'bitcoin xpub'
-    }
+      describe: "bitcoin xpub",
+    },
   },
 
   async handler({ amount, xpub, path }) {
-  const wallets = bitcoin.generateWallets(amount, xpub);
+    const wallets = bitcoin.generateWallets(amount, xpub);
     fs.writeFile(path, wallets, (error) => {
       if (error) throw error;
     });
-  }
-
+  },
 });
 
-
 yargs.command({
-  command: 'create-by-zpub',
-  describe: '',
+  command: "create-by-zpub",
+  describe: "",
   builder: {
     amount: {
-      type: 'number',
+      type: "number",
       demandOption: false,
-      describe: 'Amount of wallets, 1 for example'
+      describe: "Amount of wallets, 1 for example",
     },
     path: {
-      type: 'string',
+      type: "string",
       demandOption: true,
-      describe: 'D:/file.txt'
+      describe: "D:/file.txt",
     },
     zpub: {
-      type: 'string',
+      type: "string",
       demandOption: true,
-      describe: 'bitcoin zpub'
-    }
+      describe: "bitcoin zpub",
+    },
   },
 
   async handler({ amount, zpub, path }) {
@@ -165,9 +166,7 @@ yargs.command({
     fs.writeFile(path, wallets, (error) => {
       if (error) throw error;
     });
-  }
-
+  },
 });
-
 
 yargs.parse();
