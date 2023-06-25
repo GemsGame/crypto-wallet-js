@@ -21,8 +21,11 @@ cwj create-by-seed --amount=5 --network=bitcoin --path=D:/seed.txt --seed="toppl
 
 ```
 cwj create --network=eth --amount=1 --path=D:/ethereum.txt
+
 cwj create-seed --network=eth
+
 cwj create-by-seed --amount=5 --network=eth --path=D:/seed.txt --seed="topple uniform buyer renew brother aisle bubble ten ankle rebuild usage firm"
+
 cwj create-by-seed --amount=5 --network=eth --path=D:/seed.txt
 
 ```
