@@ -30,8 +30,8 @@ yargs.command({
   },
   handler({ network, amount, path, xpub }) {
     if (network === "eth") {
-      const wallets = ethereum.createEthWallet(amount);
-      fs.writeFile(path, wallets, (error) => {
+      const result = ethereum.createEthWallet(amount);
+      fs.writeFile(path, JSON.stringify(result), (error) => {
         if (error) throw error;
       });
     }
@@ -74,10 +74,9 @@ yargs.command({
   async handler({ network, amount, path, seed }) {
     if (network === "eth" || network === "ethereum") {
       if (!seed) seed = ethereum.createSeed();
-
-      const wallets = await ethereum.createWalletBySeed(seed, amount);
-
-      fs.writeFile(path, "seed phrase:" + seed + "\n" + wallets, (error) => {
+      const result = await ethereum.createWalletBySeed(seed, amount);
+      
+      fs.writeFile(path, JSON.stringify(result), (error) => {
         if (error) throw error;
       });
     }
