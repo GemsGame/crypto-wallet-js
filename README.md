@@ -7,7 +7,9 @@ npm link
 #### Bitcoin
 
 ```
-cwj create --network=bitcoin --xpub=xpub6CmcGnJZLYY3GFFiDKr7fJXn84Zhia3TYJhEU9wtDp2WGd6DsQSts6yv8ee6Pns3TJdFtfaNUMgFJzgMf5Ca4ATjX7idE1YpyjU1JJ6KaW1 --amount=1 --path=D:/bitcoin.txt
+cwj create-by-xpub --amount=1 --path=D:/bitcoin.txt --xpub=xpub6CPm3dBibxZBhwuSbSPAsVV9gQeC8hvrJC8VV6zMDbicJCnevDnihF44tVejjqAzXNzFkWZN4B9jup6aGz5GJyJFVxoqTrJ1eZaSLQLuWuX
+
+cwj create-by-zpub --amount=1 --path=D:/bitcoin.txt --zpub=zpub6rtX2GACNtSKp4iGw7n5EjkrirRppENZzze2aUHocRH6NshNumRLvMAT4QGJuaUtapzCbaKi5fUUQBTjnyEboUkEo1khppS18WMnsUxTSvK
 ```
 
 #### Ethereum

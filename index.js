@@ -42,12 +42,6 @@ yargs.command({
         });
       });
     }
-    if (network === 'bitcoin') {
-      const wallets = bitcoin.generateWallets(amount, xpub);
-      fs.writeFile(path, wallets, (error) => {
-        if (error) throw error;
-      });
-    }
   }
 });
 
@@ -89,6 +83,17 @@ yargs.command({
         if (error) throw error;
       });
     }
+
+    if (network === 'bitcoin' || network === 'btc') {
+
+      //if (!seed) seed = ethereum.createSeed();
+
+      //const wallets = await ethereum.createWalletBySeed(seed, amount);
+
+      //fs.writeFile(path, 'seed phrase:' + seed + '\n' + wallets, (error) => {
+        //if (error) throw error;
+      //});
+    }
   }
 
 });
@@ -96,14 +101,73 @@ yargs.command({
 
 yargs.command({
   command: 'create-seed',
-  describe: '',
+  describe: 'The command create a new 12 words phrase',
   handler() {
     const seed = ethereum.createSeed();
     console.log(seed)
   }
 });
 
+yargs.command({
+  command: 'create-by-xpub',
+  describe: '',
+  builder: {
+    amount: {
+      type: 'number',
+      demandOption: false,
+      describe: 'Amount of wallets, 1 for example'
+    },
+    path: {
+      type: 'string',
+      demandOption: true,
+      describe: 'D:/file.txt'
+    },
+    xpub: {
+      type: 'string',
+      demandOption: true,
+      describe: 'bitcoin xpub'
+    }
+  },
 
+  async handler({ amount, xpub, path }) {
+  const wallets = bitcoin.generateWallets(amount, xpub);
+    fs.writeFile(path, wallets, (error) => {
+      if (error) throw error;
+    });
+  }
+
+});
+
+
+yargs.command({
+  command: 'create-by-zpub',
+  describe: '',
+  builder: {
+    amount: {
+      type: 'number',
+      demandOption: false,
+      describe: 'Amount of wallets, 1 for example'
+    },
+    path: {
+      type: 'string',
+      demandOption: true,
+      describe: 'D:/file.txt'
+    },
+    zpub: {
+      type: 'string',
+      demandOption: true,
+      describe: 'bitcoin zpub'
+    }
+  },
+
+  async handler({ amount, zpub, path }) {
+    const wallets = bitcoin.generateWallets(amount, zpub);
+    fs.writeFile(path, wallets, (error) => {
+      if (error) throw error;
+    });
+  }
+
+});
 
 
 yargs.parse();
