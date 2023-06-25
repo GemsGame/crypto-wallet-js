@@ -14,6 +14,8 @@ cwj create-by-zpub --amount=1 --path=D:/bitcoin.txt --zpub=zpub6rtX2GACNtSKp4iGw
 cwj create-seed --network=bitcoin
 
 cwj create-by-seed --amount=1 --network=bitcoin --path=D:/bitcoin.txt --seed="duck upon hybrid cycle sport release section enough attack brother useless talk"
+
+cwj create-by-seed --amount=1 --network=bitcoin --path=D:/bitcoin.txt
 ```
 
 #### Ethereum
