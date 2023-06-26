@@ -4,13 +4,6 @@
   "description": "Сrypto Wallet Js (cwj) is a special library for cryptocurrency wallets creation. You can create ethereum, bitcoin, tron wallets by commands in terminal",
   "main": "index.js",
   "type": "commonjs",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/GemsGame/cwj.git"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -22,6 +15,8 @@
     "tiny-secp256k1": "^2.2.1",
     "tronweb": "^5.2.0",
     "yargs": "^17.7.2"
+  },
+  "bin": {
+    "cwj": "index.js"
   }
-  
 }
