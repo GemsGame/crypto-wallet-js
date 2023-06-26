@@ -7,7 +7,7 @@ const tron = require("./lib/tron.js");
 const bitcoin = require("./lib/bitcoin.js");
 const fs = require("fs");
 
-yargs.version(package.version);
+/* yargs.version(package.version);
 yargs.command({
   command: "create",
   describe: "main command for wallet creation",
@@ -170,5 +170,5 @@ yargs.command({
 
 yargs.parse();
 
-
+*/
 module.exports = { ethereum , tron, bitcoin}
