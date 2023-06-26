@@ -74,7 +74,7 @@ yargs.command({
   async handler({ network, amount, path, seed }) {
     if (network === "eth" || network === "ethereum") {
       if (!seed) seed = ethereum.createSeed();
-      const result = await ethereum.createWalletBySeed(seed, amount);
+      const result = ethereum.createWalletBySeed(seed, amount);
 
       fs.writeFile(path, JSON.stringify(result), (error) => {
         if (error) throw error;
@@ -87,7 +87,7 @@ yargs.command({
 
       const result = bitcoin.generateWalletBySeed(seed, amount);
 
-      fs.writeFile(path, result, (error) => {
+      fs.writeFile(path, JSON.stringify(result), (error) => {
         if (error) throw error;
       });
     }
@@ -132,8 +132,8 @@ yargs.command({
   },
 
   async handler({ amount, xpub, path }) {
-    const wallets = bitcoin.generateWallets(amount, xpub);
-    fs.writeFile(path, wallets, (error) => {
+    const result = bitcoin.generateWallets(amount, xpub);
+    fs.writeFile(path, JSON.stringify(result), (error) => {
       if (error) throw error;
     });
   },
@@ -161,8 +161,8 @@ yargs.command({
   },
 
   async handler({ amount, zpub, path }) {
-    const wallets = bitcoin.generateWallets(amount, zpub);
-    fs.writeFile(path, wallets, (error) => {
+    const result = bitcoin.generateWallets(amount, zpub);
+    fs.writeFile(path, JSON.stringify(result), (error) => {
       if (error) throw error;
     });
   },
