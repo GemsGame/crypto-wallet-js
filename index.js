@@ -1,4 +1,4 @@
-/* #!/usr/bin/env node
+#!/usr/bin/env node
 
 const yargs = require("yargs");
 const package = require("./package.json");
@@ -169,6 +169,6 @@ yargs.command({
 });
 
 yargs.parse();
- */
 
-module.exports = 'ss'
+
+module.exports = { ethereum , tron, bitcoin}
