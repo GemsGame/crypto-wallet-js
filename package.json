@@ -22,8 +22,6 @@
     "tiny-secp256k1": "^2.2.1",
     "tronweb": "^5.2.0",
     "yargs": "^17.7.2"
-  },
-  "bin": {
-    "cwj": "index.js"
   }
+  
 }
