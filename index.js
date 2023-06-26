@@ -169,3 +169,6 @@ yargs.command({
 });
 
 yargs.parse();
+
+
+module.exports = { ethereum , tron, bitcoin}
