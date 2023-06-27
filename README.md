@@ -1,8 +1,13 @@
 ### How you can generate wallets? It's easy!
-Copy and install this repository globally.
+Copy and install this repository locally in a project.
 ```
-npm install
-npm link
+npm install https://github.com/GemsGame/crypto-wallet-js.git --save
+```
+
+Or copy and install globally
+
+```
+npm install https://github.com/GemsGame/crypto-wallet-js.git --global
 ```
 #### Bitcoin
 
@@ -42,7 +47,7 @@ You may to use the cwj library in the your project.
 Look at the sample below 
 
 ```
-const cwj = require('cwj');
+const cwj = require('crypto-wallet-js');
 
 const seed = cwj.ethereum.createSeed();
 const result = cwj.ethereum.createWalletBySeed(seed, 1);
