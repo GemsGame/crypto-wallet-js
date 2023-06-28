@@ -82,15 +82,38 @@ yargs.command({
     }
 
     if (network === "bitcoin" || network === "btc") {
-      if (!seed) seed = bitcoin.createSeed();
-      if (seed.length) seed = bitcoin.generateSeed(seed);
 
-      const result = bitcoin.generateWalletBySeed(seed, amount);
+      if (!seed) {
+        const mnemonic = bitcoin.generateMnemonic();
+        const _seed = bitcoin.generateSeed(mnemonic);
+        const result = bitcoin.generateWalletBySeed(_seed, mnemonic, amount);
+
+        fs.writeFile(path, JSON.stringify(result), (error) => {
+          if (error) throw error;
+        });
+      } else {
+
+        const _seed = bitcoin.generateSeed(seed);
+        const result = bitcoin.generateWalletBySeed(_seed, seed, amount);
+
+        fs.writeFile(path, JSON.stringify(result), (error) => {
+          if (error) throw error;
+        });
+      }
+
+    }
+
+    if (network === 'tron') {
+      if (!seed) seed = tron.createSeed();
+      if (seed.length) seed = tron.generateSeed(seed);
+      const result = tron.createWalletBySeed(seed, amount);
 
       fs.writeFile(path, JSON.stringify(result), (error) => {
         if (error) throw error;
       });
     }
+
+
   },
 });
 
@@ -171,4 +194,4 @@ yargs.command({
 yargs.parse();
 
 
-module.exports = { ethereum , tron, bitcoin}
+module.exports = { ethereum, tron, bitcoin }
