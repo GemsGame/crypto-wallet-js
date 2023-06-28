@@ -104,13 +104,23 @@ yargs.command({
     }
 
     if (network === 'tron') {
-      if (!seed) seed = tron.createSeed();
-      if (seed.length) seed = tron.generateSeed(seed);
-      const result = tron.createWalletBySeed(seed, amount);
+      if (!seed) {
+        const mnemonic = tron.generateMnemonic();
+        const _seed = tron.generateSeed(mnemonic);
+        const result = tron.generateWalletBySeed(_seed, mnemonic, amount);
 
-      fs.writeFile(path, JSON.stringify(result), (error) => {
-        if (error) throw error;
-      });
+        fs.writeFile(path, JSON.stringify(result), (error) => {
+          if (error) throw error;
+        });
+      } else {
+
+        const _seed = tron.generateSeed(seed);
+        const result = tron.generateWalletBySeed(_seed, seed, amount);
+
+        fs.writeFile(path, JSON.stringify(result), (error) => {
+          if (error) throw error;
+        });
+      }
     }
 
 
