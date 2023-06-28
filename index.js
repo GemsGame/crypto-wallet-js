@@ -140,6 +140,11 @@ yargs.command({
       const seed = ethereum.createSeed();
       console.log(seed);
     }
+
+    if (network === "tron") {
+      const seed = tron.generateMnemonic()
+      console.log(seed);
+    }
   },
 });
 

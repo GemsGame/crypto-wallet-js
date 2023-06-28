@@ -40,6 +40,8 @@ cwj create-by-seed --amount=5 --network=eth --path=D:/seed.json
 ```
 cwj create --network=tron --amount=1 --path=D:/tron.json
 
+cwj create-seed --network=tron
+
 cwj create-by-seed --amount=5 --network=tron --path=D:/seed.json --seed="topple uniform buyer renew brother aisle bubble ten ankle rebuild usage firm"
 
 cwj create-by-seed --amount=5 --network=tron --path=D:/seed.json
