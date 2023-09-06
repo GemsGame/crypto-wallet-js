@@ -130,7 +130,7 @@ yargs.command({
 yargs.command({
   command: "create-seed",
   describe: "The command create a new 12 words phrase",
-  handler() {
+  handler({ network }) {
     if (network === "btc" || network === "bitcoin") {
       const seed = ethereum.createSeed();
       console.log(seed);
