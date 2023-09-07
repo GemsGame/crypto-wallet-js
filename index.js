@@ -74,7 +74,7 @@ yargs.command({
   async handler({ network, amount, path, seed }) {
     if (network === "eth" || network === "ethereum") {
       if (!seed) seed = ethereum.createSeed();
-      const result = ethereum.createWalletBySeed(seed, amount);
+      const result = await ethereum.createWalletBySeed(seed, amount);
 
       fs.writeFile(path, JSON.stringify(result), (error) => {
         if (error) throw error;
