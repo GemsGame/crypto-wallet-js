@@ -55,7 +55,7 @@ Look at the sample below
 const cwj = require('crypto-wallet-js');
 
 const seed = cwj.ethereum.createSeed();
-const result = cwj.ethereum.createWalletBySeed(seed, 1);
+const result = cwj.ethereum.createWalletsBySeed(seed, 1);
 
 ```
 
