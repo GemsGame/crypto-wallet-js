@@ -30,13 +30,13 @@ yargs.command({
   },
   handler({ network, amount, path }) {
     if (network === "eth") {
-      const result = ethereum.createEthWallet(amount);
+      const result = ethereum.createRandomWallets(amount);
       fs.writeFile(path, JSON.stringify(result), (error) => {
         if (error) throw error;
       });
     }
     if (network === "tron") {
-      tron.createTronWallet(amount).then((wallets) => {
+      tron.createRandomWallets(amount).then((wallets) => {
         fs.writeFile(path, wallets, (error) => {
           if (error) throw error;
         });
@@ -74,7 +74,7 @@ yargs.command({
   async handler({ network, amount, path, seed }) {
     if (network === "eth" || network === "ethereum") {
       if (!seed) seed = ethereum.createSeed();
-      const result = await ethereum.createWalletBySeed(seed, amount);
+      const result = await ethereum.createWalletsBySeed(seed, amount);
 
       fs.writeFile(path, JSON.stringify(result), (error) => {
         if (error) throw error;
@@ -84,17 +84,17 @@ yargs.command({
     if (network === "bitcoin" || network === "btc") {
 
       if (!seed) {
-        const mnemonic = bitcoin.generateMnemonic();
-        const _seed = bitcoin.generateSeed(mnemonic);
-        const result = bitcoin.generateWalletBySeed(_seed, mnemonic, amount);
+        const mnemonic = bitcoin.createMnemonic();
+        const _seed = bitcoin.createSeed(mnemonic);
+        const result = bitcoin.createWalletsBySeed(_seed, mnemonic, amount);
 
         fs.writeFile(path, JSON.stringify(result), (error) => {
           if (error) throw error;
         });
       } else {
 
-        const _seed = bitcoin.generateSeed(seed);
-        const result = bitcoin.generateWalletBySeed(_seed, seed, amount);
+        const _seed = bitcoin.createSeed(seed);
+        const result = bitcoin.createWalletsBySeed(_seed, seed, amount);
 
         fs.writeFile(path, JSON.stringify(result), (error) => {
           if (error) throw error;
@@ -105,17 +105,17 @@ yargs.command({
 
     if (network === 'tron') {
       if (!seed) {
-        const mnemonic = tron.generateMnemonic();
-        const _seed = tron.generateSeed(mnemonic);
-        const result = tron.generateWalletBySeed(_seed, mnemonic, amount);
+        const mnemonic = tron.createMnemonic();
+        const _seed = tron.createSeed(mnemonic);
+        const result = tron.createWalletsBySeed(_seed, mnemonic, amount);
 
         fs.writeFile(path, JSON.stringify(result), (error) => {
           if (error) throw error;
         });
       } else {
 
-        const _seed = tron.generateSeed(seed);
-        const result = tron.generateWalletBySeed(_seed, seed, amount);
+        const _seed = tron.createSeed(seed);
+        const result = tron.createWalletsBySeed(_seed, seed, amount);
 
         fs.writeFile(path, JSON.stringify(result), (error) => {
           if (error) throw error;
@@ -142,7 +142,7 @@ yargs.command({
     }
 
     if (network === "tron") {
-      const seed = tron.generateMnemonic()
+      const seed = tron.createMnemonic()
       console.log(seed);
     }
   },
@@ -170,7 +170,7 @@ yargs.command({
   },
 
   async handler({ amount, xpub, path }) {
-    const result = bitcoin.generateWallets(amount, xpub);
+    const result = bitcoin.createWalletsByXpub(amount, xpub);
     fs.writeFile(path, JSON.stringify(result), (error) => {
       if (error) throw error;
     });
@@ -199,7 +199,7 @@ yargs.command({
   },
 
   async handler({ amount, zpub, path }) {
-    const result = bitcoin.generateWallets(amount, zpub);
+    const result = bitcoin.createWalletsByXpub(amount, zpub);
     fs.writeFile(path, JSON.stringify(result), (error) => {
       if (error) throw error;
     });
