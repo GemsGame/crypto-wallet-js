@@ -18,7 +18,11 @@ cwj create-seed --network=bitcoin
 
 cwj create-by-seed --amount=1 --network=bitcoin --path=D:/bitcoin.json --seed="duck upon hybrid cycle sport release section enough attack brother useless talk"
 
+cwj create-by-seed --amount=1 --network=bitcoin --seed="duck upon hybrid cycle sport release section enough attack brother useless talk"
+
 cwj create-by-seed --amount=1 --network=bitcoin --path=D:/bitcoin.json
+
+cwj create-by-seed --amount=1 --network=bitcoin
 ```
 
 #### Ethereum
@@ -30,7 +34,11 @@ cwj create-seed --network=eth
 
 cwj create-by-seed --amount=5 --network=eth --path=D:/seed.json --seed="topple uniform buyer renew brother aisle bubble ten ankle rebuild usage firm"
 
+cwj create-by-seed --amount=5 --network=eth --seed="topple uniform buyer renew brother aisle bubble ten ankle rebuild usage firm"
+
 cwj create-by-seed --amount=5 --network=eth --path=D:/seed.json
+
+cwj create-by-seed --amount=5 --network=eth
 
 ```
 
@@ -42,7 +50,11 @@ cwj create-seed --network=tron
 
 cwj create-by-seed --amount=5 --network=tron --path=D:/seed.json --seed="topple uniform buyer renew brother aisle bubble ten ankle rebuild usage firm"
 
+cwj create-by-seed --amount=5 --network=tron --seed="topple uniform buyer renew brother aisle bubble ten ankle rebuild usage firm"
+
 cwj create-by-seed --amount=5 --network=tron --path=D:/seed.json
+
+cwj create-by-seed --amount=5 --network=tron
 
 ```
 

@@ -24,23 +24,34 @@ yargs.command({
     },
     path: {
       type: "string",
-      demandOption: true,
+      demandOption: false,
       describe: "D:/file.txt",
     },
   },
   handler({ network, amount, path }) {
     if (network === "eth") {
       const result = ethereum.createRandomWallets(amount);
-      fs.writeFile(path, JSON.stringify(result), (error) => {
-        if (error) throw error;
-      });
-    }
-    if (network === "tron") {
-      tron.createRandomWallets(amount).then((wallets) => {
-        fs.writeFile(path, wallets, (error) => {
+
+      if (path) {
+        fs.writeFile(path, JSON.stringify(result), (error) => {
           if (error) throw error;
         });
-      });
+      } else {
+        console.log(result);
+      }
+
+    }
+    if (network === "tron") {
+
+      if (path) {
+        tron.createRandomWallets(amount).then((wallets) => {
+          fs.writeFile(path, wallets, (error) => {
+            if (error) throw error;
+          });
+        });
+      } else {
+        console.log(wallets)
+      }
     }
   },
 });
@@ -61,7 +72,7 @@ yargs.command({
     },
     path: {
       type: "string",
-      demandOption: true,
+      demandOption: false,
       describe: "D:/file.txt",
     },
     seed: {
@@ -76,9 +87,14 @@ yargs.command({
       if (!seed) seed = ethereum.createSeed();
       const result = await ethereum.createWalletsBySeed(seed, amount);
 
-      fs.writeFile(path, JSON.stringify(result), (error) => {
-        if (error) throw error;
-      });
+      if (path) {
+        fs.writeFile(path, JSON.stringify(result), (error) => {
+          if (error) throw error;
+        });
+      } else {
+        console.log(result);
+      }
+
     }
 
     if (network === "bitcoin" || network === "btc") {
@@ -88,17 +104,25 @@ yargs.command({
         const _seed = bitcoin.createSeed(mnemonic);
         const result = bitcoin.createWalletsBySeed(_seed, mnemonic, amount);
 
-        fs.writeFile(path, JSON.stringify(result), (error) => {
-          if (error) throw error;
-        });
-      } else {
+        if (path) {
+          fs.writeFile(path, JSON.stringify(result), (error) => {
+            if (error) throw error;
+          });
+        } else {
+          console.log(result)
+        }
 
+      } else {
         const _seed = bitcoin.createSeed(seed);
         const result = bitcoin.createWalletsBySeed(_seed, seed, amount);
 
-        fs.writeFile(path, JSON.stringify(result), (error) => {
-          if (error) throw error;
-        });
+        if (path) {
+          fs.writeFile(path, JSON.stringify(result), (error) => {
+            if (error) throw error;
+          });
+        } else {
+          console.log(result)
+        }
       }
 
     }
@@ -109,17 +133,26 @@ yargs.command({
         const _seed = tron.createSeed(mnemonic);
         const result = tron.createWalletsBySeed(_seed, mnemonic, amount);
 
-        fs.writeFile(path, JSON.stringify(result), (error) => {
-          if (error) throw error;
-        });
+        if (path) {
+          fs.writeFile(path, JSON.stringify(result), (error) => {
+            if (error) throw error;
+          });
+        } else {
+          console.log(result)
+        }
+
       } else {
 
         const _seed = tron.createSeed(seed);
         const result = tron.createWalletsBySeed(_seed, seed, amount);
 
-        fs.writeFile(path, JSON.stringify(result), (error) => {
-          if (error) throw error;
-        });
+        if (path) {
+          fs.writeFile(path, JSON.stringify(result), (error) => {
+            if (error) throw error;
+          });
+        } else {
+          console.log(result);
+        }
       }
     }
 
@@ -159,7 +192,7 @@ yargs.command({
     },
     path: {
       type: "string",
-      demandOption: true,
+      demandOption: false,
       describe: "D:/file.txt",
     },
     xpub: {
@@ -171,9 +204,13 @@ yargs.command({
 
   async handler({ amount, xpub, path }) {
     const result = bitcoin.createWalletsByXpub(amount, xpub);
-    fs.writeFile(path, JSON.stringify(result), (error) => {
-      if (error) throw error;
-    });
+    if (path) {
+      fs.writeFile(path, JSON.stringify(result), (error) => {
+        if (error) throw error;
+      });
+    } else {
+      console.log(result)
+    }
   },
 });
 
@@ -188,7 +225,7 @@ yargs.command({
     },
     path: {
       type: "string",
-      demandOption: true,
+      demandOption: false,
       describe: "D:/file.txt",
     },
     zpub: {
@@ -200,9 +237,14 @@ yargs.command({
 
   async handler({ amount, zpub, path }) {
     const result = bitcoin.createWalletsByXpub(amount, zpub);
-    fs.writeFile(path, JSON.stringify(result), (error) => {
-      if (error) throw error;
-    });
+
+    if (path) {
+      fs.writeFile(path, JSON.stringify(result), (error) => {
+        if (error) throw error;
+      });
+    } else {
+      console.log(result);
+    }
   },
 });
 
