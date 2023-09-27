@@ -248,6 +248,22 @@ yargs.command({
   },
 });
 
+yargs.command({
+  command: "create-xpub-by-seed",
+  describe: "",
+  builder: {
+    seed: {
+      type: "string",
+      demandOption: true,
+      describe: "seed",
+    },
+  },
+
+  async handler({ seed }) {
+    const result = bitcoin.createXpub(seed);
+    console.log(result);
+  },
+});
 yargs.parse();
 
 

@@ -14,6 +14,8 @@ npm install https://github.com/GemsGame/crypto-wallet-js.git --global
 ```
 cwj create-by-xpub --amount=1 --path=D:/bitcoin.json --xpub=xpub6CPm3dBibxZBhwuSbSPAsVV9gQeC8hvrJC8VV6zMDbicJCnevDnihF44tVejjqAzXNzFkWZN4B9jup6aGz5GJyJFVxoqTrJ1eZaSLQLuWuX
 
+cwj create-xpub-by-seed --seed="duck upon hybrid cycle sport release section enough attack brother useless talk"
+
 cwj create-seed --network=bitcoin
 
 cwj create-by-seed --amount=1 --network=bitcoin --path=D:/bitcoin.json --seed="duck upon hybrid cycle sport release section enough attack brother useless talk"
