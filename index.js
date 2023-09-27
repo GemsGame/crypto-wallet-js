@@ -249,7 +249,7 @@ yargs.command({
 });
 
 yargs.command({
-  command: "create-xpub-by-seed",
+  command: "create-xpub",
   describe: "",
   builder: {
     seed: {
